@@ -86,7 +86,6 @@
 
 #container{
     // background-color: rgb(255, 156, 156);
-    width: 24.5%;
     border-radius: 15px;
     padding: 10px;
     color: white;
@@ -143,56 +142,54 @@
         font-size: 14px;
         text-align: center;
     }
+}
 
-    
+//Estilos para a aba de FAZER
+.taskFazer{
+    background-color: #ff0000;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 3px;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    margin: 10px 0;
+}
 
-    //Estilos para a aba de FAZER
-    .taskFazer{
-        background-color: #ff0000;
-        height: 100px;
-        display: flex;
-        flex-direction: column;
-        padding-left: 3px;
-        justify-content: space-evenly;
-        border-radius: 10px;
-        margin: 10px 0;
-    }
+//Estilos para a aba de Andamento
+.taskAndamento{
+    background-color: #ffa100;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 3px;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    margin: 10px 0;
+}
 
-    //Estilos para a aba de Andamento
-    .taskAndamento{
-        background-color: #ffa100;
-        height: 100px;
-        display: flex;
-        flex-direction: column;
-        padding-left: 3px;
-        justify-content: space-evenly;
-        border-radius: 10px;
-        margin: 10px 0;
-    }
+//Estilos para a aba de concluida
+.taskConcluida{
+    background-color: #00a007;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 3px;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    margin: 10px 0;
+}
 
-    //Estilos para a aba de concluida
-    .taskConcluida{
-        background-color: #00a007;
-        height: 100px;
-        display: flex;
-        flex-direction: column;
-        padding-left: 3px;
-        justify-content: space-evenly;
-        border-radius: 10px;
-        margin: 10px 0;
-    }
-
-    //Estilos para a aba de arquivados
-    .taskArquivada{
-        background-color: #535353;
-        height: 100px;
-        display: flex;
-        flex-direction: column;
-        padding-left: 3px;
-        justify-content: space-evenly;
-        border-radius: 10px;
-        margin: 10px 0;
-    }
+//Estilos para a aba de arquivados
+.taskArquivada{
+    background-color: #535353;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 3px;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    margin: 10px 0;
 }
 
 #headerFazer{
@@ -222,6 +219,21 @@
     background-color: #cecece;
 }
 
+div.fazer{
+    width: 24.5%;
+}
+
+div.andamento{
+    width: 24.5%;
+}
+
+div.concluida{
+    width: 24.5%;
+}
+
+div.arquivada{
+    width: 24.5%;
+}
 
 //Estilos para os botões de adicionar tarefa
 #AddFazer{

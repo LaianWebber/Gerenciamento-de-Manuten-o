@@ -35,10 +35,28 @@
         i {
             margin-top: 3px;
         }
+
+        a{
+            all: unset;
+        }
     }
 
     #sair:hover {
         color: black;
+    }
+
+    a{
+        margin-right: auto;
+        margin-left: 50px;
+        text-decoration: none;
+        color: white;
+        background-color: #676767;
+        padding: 0 5px;
+        border-radius: 8px;
+        border: 2px solid black;
+        font-family: 'Poppins';
+        font-weight: 700;
+        font-size: 18px;
     }
 }
 
