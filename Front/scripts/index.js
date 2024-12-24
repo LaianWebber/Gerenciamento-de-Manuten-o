@@ -1,15 +1,16 @@
-let id = 1;
+import { id } from '../scripts/login.js';
 
-window.onload =  () =>{
-    getUserName(id);
-    getUserTask(id);
-}
+// window.onload =  () =>{
+//     getUserName(id);
+//     getUserTask(id);
+// }
 
-function getUserName(id){
+export function getUserName(id){
     fetch(`http://localhost:3000/user/${id}`)
     .then(response => {
         if (response.status === 200) {
             console.log(response.json());
+            console.log('teste1');
             
         } else {
             console.log('nok');
@@ -18,7 +19,7 @@ function getUserName(id){
 }
 
 // ----------------------------
-function getUserTask(id){
+export function getUserTask(id){
     fetch(`http://localhost:3000/user/${id}/tasks`)
     .then(response => {
         if (response.status === 200) {

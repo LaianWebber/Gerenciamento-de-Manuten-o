@@ -33,8 +33,7 @@ app.get("/", (req, res) => {
 // -------------------------------------
 
 app.get("/users/:username", (req, res) => {
-    // Query SQL para buscar usuários com a idade fornecida
-    connection.query("SELECT passwrd FROM users WHERE username = ?", [req.params.username], (err, results) => {
+    connection.query("SELECT id, passwrd FROM users WHERE username = ?", [req.params.username], (err, results) => {
         if (err) {
             res.send('MySQL Connection error');
         }

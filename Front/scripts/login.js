@@ -1,24 +1,42 @@
 const btnEntrar = document.querySelector('#btnEntrar');
 
+export let id = 0;
 
-//Função para quando clicar em entrar, efetuar o login
 btnEntrar.addEventListener('click', () => {
-const inputEmail = document.querySelector('#inputEmail').value;
-// const inputSenha = document.querySelector('#inputSenha').value
+    const inputEmail = document.querySelector('#inputEmail').value;
+    const inputSenha = document.querySelector('#inputSenha').value;
 
-// if (inputEmail === 'admin') {
-//     window.location.href = './pages/taskManager.html';
-// } else {
-//     alert('não funcionou')
-// }
-
- // Função para buscar usuários com a idade digitada
-    // Verifica se a idade foi fornecida
-    if (!inputEmail) {
-        alert('Por favor, insira um email.');
-        return;
-    }
-})
+    getUserTask(inputEmail, inputSenha);
+});
 
 
 
+function getUserTask(username, passwrd){
+
+    fetch(`http://localhost:3000/users/${username}`)
+    .then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            console.log('nok');
+        }
+    })
+    .then(dados => {
+        if (dados.length === 0) {
+            console.log('Não existe esse usuario');
+        } else {
+            const senha = dados[0].passwrd;
+
+            if (senha === passwrd) {
+                console.log("Senha correta");
+                id = dados[0].id;
+
+                window.location.href = ''
+            } else {
+                console.log("Senha errada");   
+            }
+        }
+    })
+
+    
+}
