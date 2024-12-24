@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <img src="https://logodownload.org/wp-content/uploads/2016/10/sesi-logo.png" alt="Logo do Sesi">
+    </header>
+
+    <main id="mainTaskManager">
+        <div id="containerAllTask">
+            <section>
+                <div id="headerAllTask">
+                    <h1>Tarefas - Unidade 3º</h1>
+                    <div id="sair">
+                        <a href="../index.html"><h3>Sair</h3></a>
+                        <i class="bi bi-x-square-fill"></i>
+                    </div>
+                </div>
+
+                <div id="navAllTask">
+                    <div>
+                        <a href="../pages/taskManager.html"><i class="bi bi-card-checklist"></i>Todos</a>
+                    </div>
+
+                    <div class="itemNavTask" id="quadroChecked">
+                        <a href="../pages/taskQuadroManager.html"><i class="bi bi-kanban"></i>Quadro</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tableTasks">
+                <div id="container" class="fazer">
+                    <div id="headerFazer">
+                        <span class="fazer">A fazer </span>
+                        <h3 id="contFazer">2</h3>
+                    </div>
+
+                    <div class="taskFazer">
+                        <h2 class="tarefas">📺<a href="#">Projetor com defeito</a></h2>
+                        <h2 class="responsavel"><a href="#">Jorge - Ti</a></h2>
+                        <span class="alta">Alta</span>
+                    </div>
+
+                    <div class="taskFazer">
+                        <h2 class="tarefas">🔌<a href="#">Tomada não funcionando</a></h2>
+                        <h2 class="responsavel"><a href="#">Jorge - Ti</a></h2>
+                        <span class="alta">Alta</span>
+                    </div>
+
+                    <a href="#" id="linkAddFazer">
+                        <div id="AddFazer">
+                            <i class="bi bi-plus-circle"></i>
+                            <h2>Adicionar tarefa</h2>
+                        </div>
+                    </a>
+                </div>
+                
+
+
+                <!--Container Andamento-->
+                <div id="container" class="andamento">
+                    <div id="headerFazer">
+                        <span class="andamento">Em andamento</span>
+                        <h3 id="contAndamento">3</h3>
+                    </div>
+
+                    <div class="taskAndamento">
+                        <h2 class="tarefas">📺<a href="#">Projetor com defeito</a></h2>
+                        <h2 class="responsavel"><a href="#">Jorge - Ti</a></h2>
+                        <span class="alta">Alta</span>
+                    </div>
+
+                    <div class="taskAndamento">
+                        <h2 class="tarefas">📺<a href="#">Projetor com defeito</a></h2>
+                        <h2 class="responsavel"><a href="#">Jorge - Ti</a></h2>
+                        <span class="media">Média</span>
+                    </div>
+
+                    <div class="taskAndamento">
+                        <h2 class="tarefas">📺<a href="#">Projetor com defeito</a></h2>
+                        <h2 class="responsavel"><a href="#">Jorge - Ti</a></h2>
+                        <span class="baixa">Baixa</span>
+                    </div>
+
+                    <a href="#" id="linkAddAndamento">
+                        <div id="AddAndamento">
+                            <i class="bi bi-plus-circle"></i>
+                            <h2>Adicionar tarefa</h2>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Container concluida -->
+                <div id="container" class="concluida">
+                    <div id="headerFazer">
+                        <span class="concluida">Concluída</span>
+                        <h3 id="contConcluida">2</h3>
+                    </div>
+
+                    <div class="taskConcluida">
+                        <h2 class="tarefas">📺<a href="#">Projetor com defeito</a></h2>
+                        <h2 class="responsavel"><a href="#">Jorge - Ti</a></h2>
+                        <span class="alta">Alta</span>
+                    </div>
+
+                    <div class="taskConcluida">
+                        <h2 class="tarefas">📺<a href="#">Projetor com defeito</a></h2>
+                        <h2 class="responsavel"><a href="#">Jorge - Ti</a></h2>
+                        <span class="alta">Alta</span>
+                    </div>
+
+                    <a href="#" id="linkAddConcluida">
+                        <div id="AddConcluida">
+                            <i class="bi bi-plus-circle"></i>
+                            <h2>Adicionar tarefa</h2>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Container arquivados -->
+                <div id="container" class="arquivada">
+                    <div id="headerFazer">
+                        <span class="arquivada">Arquivadas</span>
+                        <h3 id="contArquivada">1</h3>
+                    </div>
+
+                    <div class="taskArquivada">
+                        <h2 class="tarefas">📺<a href="#">Projetor com defeito</a></h2>
+                        <h2 class="responsavel"><a href="#">Jorge - Ti</a></h2>
+                        <span class="alta">Alta</span>
+                    </div>
+
+                    <a href="#" id="linkAddArquivada">
+                        <div id="AddArquivada">
+                            <i class="bi bi-plus-circle"></i>
+                            <h2>Adicionar tarefa</h2>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>
