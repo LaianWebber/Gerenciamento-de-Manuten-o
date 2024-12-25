@@ -1,14 +1,21 @@
 const btnEntrar = document.querySelector('#btnEntrar');
 
-export let id = 0;
+let id = 0;
+export let inputEmail = 0;
 
-btnEntrar.addEventListener('click', () => {
-    const inputEmail = document.querySelector('#inputEmail').value;
+function callLogin() {
+    inputEmail = document.querySelector('#inputEmail').value;
     const inputSenha = document.querySelector('#inputSenha').value;
 
     getUserTask(inputEmail, inputSenha);
-});
+}
 
+
+if (btnEntrar) {
+    btnEntrar.addEventListener('click', () => {
+        callLogin();
+    });
+}
 
 
 function getUserTask(username, passwrd){
@@ -31,12 +38,18 @@ function getUserTask(username, passwrd){
                 console.log("Senha correta");
                 id = dados[0].id;
 
-                window.location.href = ''
+                localStorage.setItem('idUser', id);
+
+                window.location.href = 'http://localhost/Front/pages/taskManager.html';
             } else {
                 console.log("Senha errada");   
             }
         }
-    })
-
-    
+    })   
 }
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") { // Verifica se a tecla é o Enter
+        callLogin();
+    }
+});
