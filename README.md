@@ -10,7 +10,7 @@ Esta aplicação fornece uma API para auxiliar indústrias no gerenciamento de t
 
 - **Node.js**: Plataforma de execução para JavaScript no servidor.
 - **Express**: Framework para criação de rotas e gerenciamento da API.
-- **SCSS/CSS/HTML**: Para a interface front-end (se aplicável).
+- **SCSS/CSS/HTML/JS**: Para a interface front-end.
 - **Banco de Dados**: MySql (Laragon).
 
 ## Funcionalidades
