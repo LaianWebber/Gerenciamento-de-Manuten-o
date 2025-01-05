@@ -16,6 +16,7 @@ app.listen(3000, () => {
 })
 
 app.use(cors());
+app.use(express.json());
 
 // Rotas
 // ---------------------------------
@@ -88,6 +89,24 @@ app.get("/user/:id/tasks/:taskId", (req, res) => {
         }
     );
 });
+
+// -------------------------------------
+app.post("/user/:id/tasks/updateTask", (req, res) => {
+    // console.log(req.body.idUser);
+    // console.log(req.body.idTask);
+    // console.log(req.body.inputTitle);
+    // res.send('finalizado');
+
+    connection.query("UPDATE tasks SET task_title = ?, task_status = ?, task_prior = ?, task_prazo = ?, task_respon = ?, task_text = ?, updated_at = NOW() WHERE id = ?", [req.body.inputTitle, req.body.statusSpan, req.body.prioSpan, req.body.inputData, req.body.inputRespon, req.body.descricao, req.body.idTask], (err, results) => {
+        if (err) {
+            res.send('MySQL Connection error');
+            console.log('erro');
+        }
+    })
+    
+    res.json('ok');
+
+})
 
 
 

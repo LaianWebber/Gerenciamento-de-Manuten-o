@@ -1,7 +1,8 @@
 let idUser = localStorage.getItem('idUser');
+let idTask;
 
 window.onload = function() {
-    const idTask = localStorage.getItem('taskId');
+    idTask = localStorage.getItem('taskId');
     console.log(idTask);
 
     getTask(idUser, idTask);
@@ -51,3 +52,58 @@ export function getTask(idUser, idTask) {
             }
         })
 }
+
+
+// ----------------------------
+function updateTask(idUser, idTask) {
+    let inputTitle = document.getElementById("inputNameTask").value;
+
+    let statusSpan = document.getElementById("statusSpan");
+    statusSpan = statusSpan.textContent.charAt(0).toLowerCase() + statusSpan.textContent.slice(1);
+
+    let prioSpan = document.getElementById("prioSpan");
+    prioSpan = prioSpan.textContent.charAt(0).toLowerCase() + prioSpan.textContent.slice(1);
+
+
+    let inputRespon = document.getElementById("inputRespon").value;
+
+    let inputData = document.getElementById("inputData").value;
+    function converterParaDataBrasileira(dataISO) {
+        const [ano, mes, dia] = dataISO.split('-'); // Divide a string em partes
+        return `${dia}/${mes}/${ano}`; // Reorganiza para o formato dd/mm/yyyy
+    }
+    inputData = converterParaDataBrasileira(inputData);
+    
+    let descricao = document.getElementById("descricao").value;
+
+
+
+    fetch(`http://localhost:3000/user/${idUser}/tasks/updateTask/`, {
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json' },
+        body: JSON.stringify({idUser, idTask, inputTitle, statusSpan, prioSpan, inputData, inputRespon, descricao})
+    })
+    .then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            alert('Erro ao atualizar a tarefa');
+            throw new Error('Erro ao atualizar a tarefa');
+        }
+    })
+    .then(dados => {
+        console.log(dados);
+        console.log(inputTitle);
+        console.log(statusSpan);
+        console.log(prioSpan);
+        console.log(inputRespon);
+        console.log(inputData);
+        console.log(descricao);
+    })
+}
+
+
+document.getElementById('addTaskAdicionar').addEventListener('click', () => {
+    updateTask(idUser, idTask);
+});
+
