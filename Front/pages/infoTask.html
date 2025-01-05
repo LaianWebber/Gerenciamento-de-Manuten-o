@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script type="module" src="../scripts/index.js" defer></script>
+    <script type="module" src="../scripts/infoTask.js" defer></script>
+    <link rel="stylesheet" href="../styles.css">
+    <title>Document</title>
+</head>
+
+<body id="bodyAddTask">
+    <header>
+        <img src="https://logodownload.org/wp-content/uploads/2016/10/sesi-logo.png" alt="Logo do Sesi">
+    </header>
+
+    <section id="containerAddTask">
+        <div id="headerAllTask">
+            <h1>Atualizar Tarefa</h1>
+
+            <div id="sair">
+                <a href="./taskManager.html">
+                    <h3>Sair</h3>
+                </a>
+            </div>
+        </div>
+
+        <main id="container" class="mainAddTask">
+            <div style="position: relative; display: inline-block; width: 120px; height: 120px;">
+                <img id="imgUpload"
+                    src="https://thumbs.dreamstime.com/b/tomada-el%C3%A9trica-quebrada-perigosa-que-cai-da-parede-fechar-284203756.jpg"
+                    alt="Foto do pedido" width="120px" height="120px">
+                <i class="bi bi-images" style="color: black; position: absolute; top: 10px; right: 10px;"></i>
+                <input id="fileInput" type="file" accept="image/*" style="display: none;">
+
+            </div>
+            <input type="text" value="Nome da tarefa" id="inputNameTask" maxlength="100">
+
+            <div id="addTaskStatus" class="addTaskItems">
+                <h3><i class="bi bi-hourglass-split"></i> Status</h3>
+                <span id="statusSpan">A fazer</span>
+                <i id="toggleSelect" class="bi bi-caret-left-fill" style="cursor: pointer;"></i>
+
+                <div id="selectStatus" style="display: none;">
+                    <span id="optionFazer" class="fazer">A fazer</span>
+                    <span id="optionAndamento" class="andamento">Em andamento</span>
+                    <span id="optionConcluida" class="concluida">Concluída</span>
+                    <span id="optionArquivada" class="arquivada">Arquivada</span>
+                </div>
+            </div>
+
+            <div id="addTaskPrioridade" class="addTaskItems">
+                <h3><i class="bi bi-star-fill"></i> Prioridade</h3>
+                <span id="prioSpan">Alta</span>
+                <i id="iconSelect2" class="bi bi-caret-left-fill" style="cursor: pointer;"></i>
+
+                <div id="selectPrio" style="display: none;">
+                    <span id="optionAlta" class="alta">Alta</span>
+                    <span id="optionMedia" class="media">Média</span>
+                    <span id="optionBaixa" class="baixa">Baixa</span>
+                </div>
+            </div>
+
+            <div id="addTaskResponsavel" class="addTaskItems">
+                <h3><i class="bi bi-file-person-fill"></i> Responsável</h3>
+                <input id="inputRespon" type="text" placeholder="Vazio">
+            </div>
+
+            <div id="addTaskPrazo" class="addTaskItems">
+                <h3><i class="bi bi-calendar-week-fill"></i> Prazo</h3>
+                <input id="inputData" type="date">
+            </div>
+
+            <div id="addTaskDescricao">
+                <h2>Descrição</h2>
+                <textarea id="descricao" rows="14" cols="250" placeholder="Escreva aqui a descrição da tarefa"></textarea>
+            </div>
+
+            <a href="#" id="addTaskAdicionar" style="cursor: pointer;">Atualizar</a>
+        </main>
+    </section>
+
+    <script>
+        // Seleciona a imagem e o input file
+        const img = document.getElementById("imgUpload");
+        const fileInput = document.getElementById("fileInput");
+
+        // Adiciona um evento de clique à imagem
+        img.addEventListener("click", () => {
+            fileInput.click(); // Simula o clique no input file
+        });
+
+        // Adiciona um evento ao input file para alterar a imagem
+        fileInput.addEventListener("change", (event) => {
+            const file = event.target.files[0]; // Obtém o arquivo selecionado
+            if (file) {
+                const reader = new FileReader();
+
+                // Quando o arquivo for carregado, altera o src da imagem
+                reader.onload = (e) => {
+                    img.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file); // Lê o arquivo como uma URL base64
+            }
+        });
+
+    </script>
+
+    <script>
+        const iconSelect = document.querySelector("#toggleSelect");
+        const btnStatus = document.querySelector('#statusSpan');
+        const select = document.querySelector('#selectStatus');
+
+        const optionFazer = document.querySelector('#optionFazer');
+        const optionAndamento = document.querySelector('#optionAndamento');
+        const optionConcluida = document.querySelector('#optionConcluida');
+        const optionArquivada = document.querySelector('#optionArquivada');
+
+        let rotation = 0;
+
+        iconSelect.addEventListener("click", () => {
+
+            if (select.style.display === 'none') {
+                select.style.display = 'block';
+                rotation += 180;
+                // Aplica a rotação ao estilo do elemento
+                iconSelect.style.transform = `rotate(${rotation}deg)`;
+            } else {
+                select.style.display = 'none';
+                rotation -= 180;
+                // Aplica a rotação ao estilo do elemento
+                iconSelect.style.transform = `rotate(${rotation}deg)`;
+            }
+
+        });
+
+        btnStatus.addEventListener("click", () => {
+            const taskId = localStorage.getItem('taskId');
+
+            console.log(taskId);
+            
+
+            if (select.style.display === 'none') {
+                select.style.display = 'block';
+                rotation += 180;
+                // Aplica a rotação ao estilo do elemento
+                iconSelect.style.transform = `rotate(${rotation}deg)`;
+            } else {
+                select.style.display = 'none';
+                rotation -= 180;
+                // Aplica a rotação ao estilo do elemento
+                iconSelect.style.transform = `rotate(${rotation}deg)`;
+            }
+
+        });
+
+
+        optionFazer.addEventListener("click", () => {
+            btnStatus.textContent = "A fazer";
+            btnStatus.className = "fazer";
+            select.style.display = 'none';
+        });
+
+        optionAndamento.addEventListener("click", () => {
+            btnStatus.textContent = "Em andamento";
+            btnStatus.className = "andamento";
+            select.style.display = 'none';
+        });
+
+        optionConcluida.addEventListener("click", () => {
+            btnStatus.textContent = "Concluída";
+            btnStatus.className = "concluida";
+            select.style.display = 'none';
+        });
+
+        optionArquivada.addEventListener("click", () => {
+            btnStatus.textContent = "Arquivada";
+            btnStatus.className = "arquivada";
+            select.style.display = 'none';
+        });
+    </script>
+
+    <script>
+        const selectPrio = document.querySelector('#selectPrio');
+        const btnPrio = document.querySelector('#prioSpan');
+        const iconSelect2 = document.querySelector('#iconSelect2');
+
+        const optionAlta = document.querySelector('#optionAlta');
+        const optionMedia = document.querySelector('#optionMedia');
+        const optionBaixa = document.querySelector('#optionBaixa');
+
+        let rotation2 = 0;
+
+        btnPrio.addEventListener('click', () => {
+            if (selectPrio.style.display === 'none') {
+                selectPrio.style.display = 'block';
+                rotation2 += 180;
+                // Aplica a rotação ao estilo do elemento
+                iconSelect2.style.transform = `rotate(${rotation2}deg)`;
+            } else {
+                selectPrio.style.display = 'none';
+                rotation2 -= 180;
+                // Aplica a rotação ao estilo do elemento
+                iconSelect2.style.transform = `rotate(${rotation2}deg)`;
+            }
+        });
+
+        optionAlta.addEventListener("click", () => {
+            btnPrio.textContent = "Alta";
+            btnPrio.className = "alta";
+            selectPrio.style.display = 'none';
+        });
+
+        optionMedia.addEventListener("click", () => {
+            btnPrio.textContent = "Média";
+            btnPrio.className = "media";
+            selectPrio.style.display = 'none';
+        });
+
+        optionBaixa.addEventListener("click", () => {
+            btnPrio.textContent = "Baixa";
+            btnPrio.className = "baixa";
+            selectPrio.style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>
