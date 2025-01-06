@@ -1,30 +1,80 @@
-# Gerenciamento de Manutenção.
+# Gerenciamento de Manutenção
 
-Uma API desenvolvida com Node.js e Express para gerenciar manutenções preventivas e corretivas em ambientes industriais.
+Um sistema web desenvolvido para gerenciar manutenções preventivas e corretivas em ambientes industriais.
 
 ## Descrição
 
-Esta aplicação fornece uma API para auxiliar indústrias no gerenciamento de tarefas de manutenção. Com ela, é possível criar, atualizar, listar e deletar registros de manutenções, além de obter informações sobre o status das atividades.
+Este projeto visa fornecer uma interface intuitiva para o acompanhamento e registro de manutenções industriais, permitindo o controle eficiente de tarefas e equipamentos.
 
 ## Tecnologias Utilizadas
 
-- **Node.js**: Plataforma de execução para JavaScript no servidor.
-- **Express**: Framework para criação de rotas e gerenciamento da API.
-- **SCSS/CSS/HTML/JS**: Para a interface front-end.
-- **Banco de Dados**: MySql (Laragon).
+- **HTML5**: Estruturação das páginas web.
+- **CSS3/SCSS**: Estilização e design responsivo.
+- **JavaScript**: Funcionalidades interativas no front-end.
+- **PHP**: Lógica de back-end e comunicação com o banco de dados.
+- **MySQL**: Banco de dados para armazenamento das informações.
 
 ## Funcionalidades
 
-- CRUD de manutenções (Create, Read, Update, Delete).
-- Acompanhamento de status das manutenções.
-- Rotas organizadas para fácil integração com um front-end ou ferramentas de terceiros.
-- Logs de erro para monitoramento.
+- **Cadastro de Usuários**: Permite o registro de usuários com diferentes níveis de acesso (Administrador, Técnico, Usuário Comum).
+- **Gerenciamento de Equipamentos**: Cadastro e edição de informações sobre os equipamentos industriais.
+- **Solicitação de Manutenção**: Usuários podem abrir solicitações de manutenção que são direcionadas aos técnicos responsáveis.
+- **Acompanhamento de Status**: Visualização do progresso das manutenções em andamento.
+- **Relatórios**: Geração de relatórios sobre manutenções realizadas, pendentes e estatísticas relevantes.
 
 ## Instalação
 
-Siga os passos abaixo para rodar a API localmente:
+Para executar o projeto localmente, siga os passos abaixo:
 
 1. **Clone o repositório**:
 
    ```bash
    git clone https://github.com/GabrielLowis/Gerenciamento-de-Manutencao.git
+   ```
+
+2. **Configure o servidor local**:
+
+   - Utilize uma ferramenta como [XAMPP](https://www.apachefriends.org/pt_br/index.html) ou [Laragon](https://laragon.org/) para configurar um servidor Apache com suporte a PHP e MySQL.
+
+3. **Importe o banco de dados**:
+
+   - Localize o arquivo `database.sql` no repositório.
+   - Utilize o phpMyAdmin ou outro gerenciador de banco de dados para importar o arquivo e criar as tabelas necessárias.
+
+4. **Configure as credenciais do banco de dados**:
+
+   - No arquivo `config.php`, ajuste as credenciais de acesso ao banco de dados conforme sua configuração local.
+
+5. **Inicie o servidor**:
+
+   - Coloque os arquivos do projeto na pasta `htdocs` (ou equivalente) do seu servidor local.
+   - Inicie o servidor Apache e acesse o projeto através do navegador, geralmente em `http://localhost/Gerenciamento-de-Manutencao`.
+
+## Uso
+
+1. **Acesse o sistema**:
+
+   - Utilize as credenciais padrão ou crie um novo usuário para acessar o sistema.
+
+2. **Navegue pelas funcionalidades**:
+
+   - Utilize o menu para acessar as diferentes seções: Usuários, Equipamentos, Solicitações de Manutenção, Relatórios, etc.
+
+3. **Registre uma nova manutenção**:
+
+   - Vá até a seção de solicitações e preencha o formulário com as informações necessárias.
+
+4. **Acompanhe o status**:
+
+   - Verifique o andamento das manutenções na seção de status, onde é possível atualizar informações e concluir tarefas.
+
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+Este README oferece uma visão abrangente do projeto, facilitando sua instalação, uso e contribuição. Para aprofundar seu conhecimento sobre gestão de manutenção, você pode assistir ao seguinte vídeo:
+
+ 
