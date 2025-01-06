@@ -85,6 +85,7 @@ function updateTask(idUser, idTask) {
     })
     .then(response => {
         if (response.status === 200) {
+            alert('Tarefa atualizada com sucesso')
             return response.json();
         } else {
             alert('Erro ao atualizar a tarefa');
@@ -102,8 +103,36 @@ function updateTask(idUser, idTask) {
     })
 }
 
+function deleteTask(idUser, idTask) {
+    if (confirm("Tem certeza de que deseja deletar esta tarefa?")) {
+        fetch(`http://localhost:3000/user/${idUser}/tasks/${idTask}`, {
+            method: "DELETE",
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                alert("Tarefa deletada com sucesso!");
+                // Aqui você pode recarregar a lista de tarefas
+                console.log(`Tarefa ${idTask} deletada!`);
+
+                window.location.href = "http://localhost/Front/pages/taskManager.html";
+            } else if (response.status === 404) {
+                alert("Tarefa não encontrada.");
+            } else {
+                alert("Erro ao deletar a tarefa.");
+            }
+            return response.json();
+        })
+        .catch((err) => {
+            console.error("Erro na exclusão da tarefa:", err);
+        });
+    }
+}
 
 document.getElementById('addTaskAdicionar').addEventListener('click', () => {
     updateTask(idUser, idTask);
 });
+
+document.getElementById('addTaskDeletar').addEventListener('click', () => {
+    deleteTask(idUser, idTask)
+})
 

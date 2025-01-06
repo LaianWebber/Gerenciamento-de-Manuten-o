@@ -863,9 +863,6 @@ span.arquivada {
 .mainAddTask * {
   margin-bottom: 10px;
 }
-.mainAddTask a:hover {
-  background-color: aqua;
-}
 
 .addTaskItems {
   display: flex;
@@ -966,4 +963,23 @@ span.arquivada {
   position: absolute;
   top: 25px;
   right: 25px;
+}
+
+#addTaskDeletar {
+  all: unset;
+  width: 100px;
+  padding: 5px 15px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins";
+  font-weight: 700;
+  font-style: italic;
+  background-color: #676767;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#addTaskDeletar:hover {
+  background-color: red;
+  color: black;
 }/*# sourceMappingURL=styles.css.map */
