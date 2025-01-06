@@ -74,7 +74,4 @@ Para executar o projeto localmente, siga os passos abaixo:
 Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
-
-Este README oferece uma visão abrangente do projeto, facilitando sua instalação, uso e contribuição. Para aprofundar seu conhecimento sobre gestão de manutenção, você pode assistir ao seguinte vídeo:
-
  
