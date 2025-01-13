@@ -21,7 +21,7 @@
             <h1>Criar Tarefa</h1>
 
             <div id="sair">
-                <a href="./taskManager.html">
+                <a id="linkSair" href="./taskManager.html">
                     <h3>Sair</h3>
                 </a>
             </div>
@@ -46,7 +46,7 @@
                 <div id="selectStatus" style="display: none;">
                     <span id="optionFazer" class="fazer">A fazer</span>
                     <span id="optionAndamento" class="andamento">Em andamento</span>
-                    <span id="optionConcluida" class="concluida">Concluída</span>
+                    <span id="optionConcluida" class="concluida">Concluida</span>
                     <span id="optionArquivada" class="arquivada">Arquivada</span>
                 </div>
             </div>
@@ -58,7 +58,7 @@
 
                 <div id="selectPrio" style="display: none;">
                     <span id="optionAlta" class="alta">Alta</span>
-                    <span id="optionMedia" class="media">Média</span>
+                    <span id="optionMedia" class="media">Media</span>
                     <span id="optionBaixa" class="baixa">Baixa</span>
                 </div>
             </div>
@@ -78,9 +78,26 @@
                 <textarea id="descricao" rows="14" cols="250" placeholder="Escreva aqui a descrição da tarefa"></textarea>
             </div>
 
-            <a href="#" id="addTaskAdicionar" style="cursor: pointer;">Adicionar</a>
+            <a href="" id="addTaskAdicionar" style="cursor: pointer;">Adicionar</a>
         </main>
     </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+           // Obtém o parâmetro "source" da URL
+           const params = new URLSearchParams(window.location.search);
+           const source = params.get("source");
+
+           // Define o link para voltar
+           const sairLink = document.getElementById("linkSair");
+           if (source) {
+               // Reconstrói o caminho com base no identificador
+               sairLink.href = `./${source}.html`;
+           } else {
+               sairLink.href = "#"; // Link vazio se não houver origem
+           }
+       });
+   </script>
 
     <script>
         // Seleciona a imagem e o input file
@@ -171,7 +188,7 @@
         });
 
         optionConcluida.addEventListener("click", () => {
-            btnStatus.textContent = "Concluída";
+            btnStatus.textContent = "Concluida";
             btnStatus.className = "concluida";
             select.style.display = 'none';
         });
@@ -215,7 +232,7 @@
         });
 
         optionMedia.addEventListener("click", () => {
-            btnPrio.textContent = "Média";
+            btnPrio.textContent = "Media";
             btnPrio.className = "media";
             selectPrio.style.display = 'none';
         });

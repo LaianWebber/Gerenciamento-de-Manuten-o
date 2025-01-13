@@ -13,6 +13,7 @@ function createTask(idUser) {
     prioSpan = prioSpan.textContent.charAt(0).toLowerCase() + prioSpan.textContent.slice(1);
 
     let inputRespon = document.getElementById("inputRespon").value;
+    inputRespon = inputRespon.textContent.charAt(0).toLowerCase() + inputRespon.textContent.slice(1);
 
     let inputData = document.getElementById("inputData").value;
     function converterParaDataBrasileira(dataISO) {

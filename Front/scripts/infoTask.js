@@ -78,7 +78,7 @@ function updateTask(idUser, idTask) {
 
 
 
-    fetch(`http://localhost:3000/user/${idUser}/tasks/updateTask/`, {
+    fetch(`http://localhost:3000/tasks/updateTask`, {
         method: 'POST',
         headers: { 'Content-Type' : 'application/json' },
         body: JSON.stringify({idUser, idTask, inputTitle, statusSpan, prioSpan, inputData, inputRespon, descricao})
@@ -86,7 +86,10 @@ function updateTask(idUser, idTask) {
     .then(response => {
         if (response.status === 200) {
             alert('Tarefa atualizada com sucesso')
-            return response.json();
+            console.log('Tarefa atualizada com sucesso');
+            
+            window.location.href = "http://localhost/Front/pages/taskManager.html";
+            // return response.json();
         } else {
             alert('Erro ao atualizar a tarefa');
             throw new Error('Erro ao atualizar a tarefa');

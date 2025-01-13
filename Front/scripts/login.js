@@ -40,10 +40,19 @@ function getUserTask(username, passwrd){
 
                 localStorage.setItem('idUser', id);
 
-                window.location.href = 'http://localhost/Front/pages/taskManager.html';
+                if (dados[0].nivel === 1) {
+                    window.location.href = 'http://localhost/Front/pages/taskManager.html';
+                } else if (dados[0].nivel === 2) {
+                    window.location.href = 'http://localhost/Front/pages/taskColab.html';
+                }
+                
+                
+
             } else {
                 console.log("Senha errada");   
             }
+
+           
         }
     })   
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script type="module" src="../scripts/index.js" defer></script>
+    <!-- <script type="module" src="../scripts/index.js" defer></script> -->
     <link rel="stylesheet" href="../styles.css">
     <title>Documentt</title>
 </head>
@@ -19,8 +19,8 @@
         <div id="containerAllTask">
             <section>
                 <div id="headerAllTask">
-                    <h1>Tarefas - Unidade 3º</h1>
-                    <a href="./addTask.html?source=taskManager"><i class="bi bi-clipboard2-plus-fill"></i> Adicionar tarefa</a>
+                    <h1 id="title">Suas tarefas</h1>
+                    <a href="./addTask.html?source=taskColab"><i class="bi bi-clipboard2-plus-fill"></i> Adicionar tarefa</a>
                     <div id="sair">
                         <a href="../index.html">
                             <h3>Sair</h3>
@@ -31,11 +31,11 @@
 
                 <div id="navAllTask">
                     <div class="itemNavTask">
-                        <a href="#"><i class="bi bi-card-checklist"></i>Todos</a>
+                        <a href="./taskColab.html"><i class="bi bi-card-checklist"></i>Todos</a>
                     </div>
 
                     <div>
-                        <a href="../pages/taskQuadroManager.html"><i class="bi bi-kanban"></i>Quadro</a>
+                        <a href="./taskQuadroColab.html"><i class="bi bi-kanban"></i>Quadro</a>
                     </div>
                 </div>
             </section>
@@ -53,7 +53,7 @@
                     <!-- <tr>
                         <td class="tarefas">📺<a href="#"> Projetor com defeito</a></td>
                         <td class="status"> <span class="fazer">A fazer </span></td>
-                        <td class=""><a href="#">Jorge - Ti</a></td>
+                        <td class="responsavel"><a href="#">Jorge - Ti</a></td>
                         <td class="prazo"><span>21/03/2025</span></td>
                         <td class="prioridade"><span class="alta">Alta</span></td>
                         <td class="descricao">Aqui terá uma descrição da tarefa para o colaborador poder ler e resolver a tarefa</td>
@@ -93,5 +93,84 @@
             localStorage.setItem('taskId', id);
         }
     </script>
+
+    <script>
+
+        let idUser = localStorage.getItem('idUser');
+
+        // window.editStatus = function (idTask) {
+        //     console.log(idTask);
+        // };
+
+        window.onload = () => {
+            getUserName(idUser)
+        }
+
+        function getUserName(idUser) {
+            fetch(`http://localhost:3000/user/${idUser}`)
+                .then(response => {
+                    if (response.status === 200) {
+                        // console.log(response.json());
+                        return response.json();
+                    } else {
+                        console.log('nok');
+                    }
+                })
+                .then(data => {
+                    console.log(data[0].username);
+                    const username = data[0].username;
+
+                    const title = document.querySelector('#title');
+                    title.textContent += ` - ${username.charAt(0).toUpperCase() + username.slice(1)}`;
+
+                    getTask(username);
+                });
+        }
+
+        // ----------------------------
+        function getTask(username) {
+            fetch(`http://localhost:3000/tasks`)
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.json();
+                    } else {
+                        console.log('nok');
+                    }
+                })
+                .then(tarefas => {
+                    if (tarefas.length === 0) {
+                        document.querySelector('#tableTasks').style.display = 'none';
+                        console.log("Você não tem tarefas");
+                    } else {
+                        let contadorFazer = 0;
+                        let contadorAndamento = 0;
+                        let contadorConcluida = 0;
+                        let contadorArquivada = 0;
+
+                        console.log(tarefas.length);
+
+                        tarefas.forEach(tarefa => {
+                            if (tarefa.task_respon == username) {
+                                const tasks = document.querySelector('#tasks');
+                                if (tasks) {
+                                    let htmlTask = `<tr>
+                                            <td class="tarefas">📺<a href="../pages/infoTask.html?source=taskColab" onclick="storeTaskId(${tarefa.id})">${tarefa.task_title}</a></td>
+                                            <td class="status" onclick="editStatus(${tarefa.id})" > <span class="${tarefa.task_status}">${tarefa.task_status.charAt(0).toUpperCase() + tarefa.task_status.slice(1)}</span></td>
+                                            <td class="responsavel"><a href="#">${tarefa.task_respon.charAt(0).toUpperCase() + tarefa.task_respon.slice(1)}</a></td>
+                                            <td class="prazo"><span>${tarefa.task_prazo}</span></td>
+                                            <td class="prioridade"><span class="${tarefa.task_prior}">${tarefa.task_prior.charAt(0).toUpperCase() + tarefa.task_prior.slice(1)}</span></td>
+                                            <td class="descricao">${tarefa.task_text}</td>
+                                        </tr>`;
+                                    tasks.innerHTML += htmlTask;
+
+                                    console.log('idTask: ' + tarefa.id);
+                                }
+                            }
+                        });
+                    }
+                })
+        }
+    </script>
 </body>
+
 </html>
