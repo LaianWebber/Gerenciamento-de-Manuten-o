@@ -31,15 +31,26 @@ app.get("/", (req, res) => {
     })
 });
 
+// ---------------------------------
+app.get("/tasks", (req, res) => {
+    connection.query("SELECT * from tasks", (err, results) => {
+        if (err) {
+            res.send('MySQL Connection error');
+        }
+        res.json(results);
+        
+    })
+});
+
 // -------------------------------------
 
 app.get("/users/:username", (req, res) => {
-    connection.query("SELECT id, passwrd FROM users WHERE username = ?", [req.params.username], (err, results) => {
+    connection.query("SELECT id, passwrd, nivel FROM users WHERE username = ?", [req.params.username], (err, results) => {
         if (err) {
             res.send('MySQL Connection error');
         }
 
-        // Retorna os resultados como JSON para o frontend
+        
         res.json(results);
     });
 });
@@ -70,10 +81,10 @@ app.get("/user/:id/tasks/", (req, res) => {
 
 // Nova rota para pegar informações de uma tarefa de um usuário específico
 app.get("/user/:id/tasks/:taskId", (req, res) => {
-    const userId = req.params.id;       // ID do usuário
+    // const userId = req.params.id;       // ID do usuário
     const taskId = req.params.taskId;   // ID da tarefa
 
-    connection.query("SELECT * FROM tasks WHERE id_user = ? AND id = ?", [userId, taskId], (err, results) => {
+    connection.query("SELECT * FROM tasks WHERE id = ?", [ taskId ], (err, results) => {
             if (err) {
                 res.send('MySQL Connection error');
                 console.log('erro');
@@ -91,7 +102,7 @@ app.get("/user/:id/tasks/:taskId", (req, res) => {
 });
 
 // -------------------------------------
-app.post("/user/:id/tasks/updateTask", (req, res) => {
+app.post("/tasks/updateTask", (req, res) => {
     // console.log(req.body.idUser);
     // console.log(req.body.idTask);
     // console.log(req.body.inputTitle);
