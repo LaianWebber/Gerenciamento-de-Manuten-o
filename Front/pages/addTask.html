@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -63,6 +63,11 @@
                 </div>
             </div>
 
+            <div id="addTaskSala" class="addTaskItems">
+                <h3><i class="bi bi-door-open-fill"></i> Sala</h3>
+                <input id="inputSala" type="number" placeholder="Nº Sala" style="margin-left: 80px;">
+            </div>
+
             <div id="addTaskResponsavel" class="addTaskItems">
                 <h3><i class="bi bi-file-person-fill"></i> Responsável</h3>
                 <input id="inputRespon" type="text" placeholder="Vazio">
@@ -75,29 +80,30 @@
 
             <div id="addTaskDescricao">
                 <h2>Descrição</h2>
-                <textarea id="descricao" rows="14" cols="250" placeholder="Escreva aqui a descrição da tarefa"></textarea>
+                <textarea id="descricao" rows="14" cols="250"
+                    placeholder="Escreva aqui a descrição da tarefa"></textarea>
             </div>
 
-            <a href="" id="addTaskAdicionar" style="cursor: pointer;">Adicionar</a>
+            <a id="addTaskAdicionar" style="cursor: pointer;">Adicionar</a>
         </main>
     </section>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-           // Obtém o parâmetro "source" da URL
-           const params = new URLSearchParams(window.location.search);
-           const source = params.get("source");
+            // Obtém o parâmetro "source" da URL
+            const params = new URLSearchParams(window.location.search);
+            const source = params.get("source");
 
-           // Define o link para voltar
-           const sairLink = document.getElementById("linkSair");
-           if (source) {
-               // Reconstrói o caminho com base no identificador
-               sairLink.href = `./${source}.html`;
-           } else {
-               sairLink.href = "#"; // Link vazio se não houver origem
-           }
-       });
-   </script>
+            // Define o link para voltar
+            const sairLink = document.getElementById("linkSair");
+            if (source) {
+                // Reconstrói o caminho com base no identificador
+                sairLink.href = `./${source}.html`;
+            } else {
+                sairLink.href = "#"; // Link vazio se não houver origem
+            }
+        });
+    </script>
 
     <script>
         // Seleciona a imagem e o input file
@@ -158,7 +164,7 @@
             const taskId = localStorage.getItem('taskId');
 
             console.log(taskId);
-            
+
 
             if (select.style.display === 'none') {
                 select.style.display = 'block';
@@ -242,6 +248,69 @@
             btnPrio.className = "baixa";
             selectPrio.style.display = 'none';
         });
+    </script>
+
+    <script>
+        function callToTask() {
+            console.log("Usuário veio de openCalls!");
+
+            const idCall = localStorage.getItem('idCall');
+            console.log(idCall);
+
+            fetch(`http://localhost:3000/call/${idCall}`)
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.json(); // Retorna o JSON para a próxima then
+                    } else {
+                        console.error('Erro na resposta da API:', response.status);
+                        throw new Error('Erro ao buscar dados'); // Lança erro para ser tratado no catch
+                    }
+                })
+                .then(call => {
+                    if (call.length === 0) {
+                        console.log('Não existem Chamados');
+                    } else {
+                        const inputSala = document.querySelector("#inputSala");
+                        const descricao = document.getElementById('descricao');
+
+                        inputSala.value = call[0].sala;
+                        descricao.value = call[0].text;
+                        
+
+                        fetch(`http://localhost:3000/getImage/${call[0].id_image}`)
+                            .then(response => {
+                                if (response.ok) {
+                                    return response.blob(); // Obtém a imagem como um Blob
+                                } else {
+                                    throw new Error("Erro ao buscar a imagem");
+                                }
+                            })
+                            .then(blob => {
+                                const url = URL.createObjectURL(blob); // Cria uma URL para o Blob
+                                const imgTag = document.querySelector("#imgUpload");
+                                imgTag.src = url; // Define o src da tag <img>
+                            })
+                            .catch(error => {
+                                console.error("Erro ao carregar a imagem:", error);
+                            });
+
+                        // Outros campos do chamado podem ser usados aqui
+                        // {call[0].id_image}, {call[0].sala}, {call[0].text}, etc.
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao processar os chamados:', error);
+                });
+        }
+
+        // Obtendo os parâmetros da URL
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Verifica se o parâmetro 'source' tem o valor 'openCalls'
+        if (urlParams.get('source') === 'openCalls') {
+            callToTask();
+        }
+
     </script>
 </body>
 

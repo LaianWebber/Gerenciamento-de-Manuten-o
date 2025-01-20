@@ -13,7 +13,9 @@ function createTask(idUser) {
     prioSpan = prioSpan.textContent.charAt(0).toLowerCase() + prioSpan.textContent.slice(1);
 
     let inputRespon = document.getElementById("inputRespon").value;
-    inputRespon = inputRespon.textContent.charAt(0).toLowerCase() + inputRespon.textContent.slice(1);
+    inputRespon = inputRespon.charAt(0).toLowerCase() + inputRespon.slice(1);
+
+    let inputSala = document.getElementById("inputSala").value;
 
     let inputData = document.getElementById("inputData").value;
     function converterParaDataBrasileira(dataISO) {
@@ -28,7 +30,7 @@ function createTask(idUser) {
     fetch(`http://localhost:3000/user/${idUser}/tasks/createTask/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ idUser, inputTitle, statusSpan, prioSpan, inputData, inputRespon, descricao })
+        body: JSON.stringify({ idUser, inputTitle, statusSpan, prioSpan, inputData, inputSala, inputRespon, descricao })
     })
     .then(response => {
         if (response.status === 200) {

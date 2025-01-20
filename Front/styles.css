@@ -259,7 +259,6 @@ header img {
   color: black;
 }
 #headerAllTask a {
-  margin-right: auto;
   margin-left: 50px;
   text-decoration: none;
   color: white;
@@ -270,6 +269,11 @@ header img {
   font-family: "Poppins";
   font-weight: 700;
   font-size: 18px;
+}
+
+#headerAllTask a:nth-of-type(2) {
+  margin-right: auto;
+  margin-left: 10px;
 }
 
 /* Navegação entre as seções 'Todos' e 'Quadro' */
@@ -370,6 +374,11 @@ header img {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+#tasks td.call {
+  white-space: normal;
+  line-height: 25px;
 }
 
 /* Estilo da célula de tarefas, que inclui links */
@@ -902,7 +911,7 @@ span.arquivada {
 #addTaskResponsavel input {
   all: unset;
   background-color: #676767;
-  width: 50%;
+  width: 8%;
   border-radius: 5px;
   padding-left: 15px;
 }
@@ -912,6 +921,28 @@ span.arquivada {
   font-size: 14px;
 }
 #addTaskResponsavel input::placeholder {
+  color: white;
+  font-family: "Poppins";
+  font-size: 14px;
+}
+
+#addTaskSala {
+  gap: 70px;
+  width: 900px;
+}
+#addTaskSala input {
+  all: unset;
+  background-color: #676767;
+  width: 8%;
+  border-radius: 5px;
+  padding-left: 15px;
+}
+#addTaskSala input::-moz-placeholder {
+  color: white;
+  font-family: "Poppins";
+  font-size: 14px;
+}
+#addTaskSala input::placeholder {
   color: white;
   font-family: "Poppins";
   font-size: 14px;

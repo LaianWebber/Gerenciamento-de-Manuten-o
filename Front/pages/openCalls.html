@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- <script type="module" src="../scripts/index.js" defer></script> -->
+    <link rel="stylesheet" href="../styles.css">
+    <title>Documentt</title>
+
+    <style>
+        /* Estilos para o modal */
+        .modal {
+            display: none;
+            /* Escondido por padrão */
+            position: fixed;
+            z-index: 1;
+            /* Fica acima de outros elementos */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Fundo escurecido */
+            overflow: auto;
+            padding-top: 30px;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            /* Máximo de 700px para a imagem */
+        }
+
+        #caption {
+            text-align: center;
+            color: #ccc;
+            font-size: 20px;
+            margin-top: 15px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="https://logodownload.org/wp-content/uploads/2016/10/sesi-logo.png" alt="Logo do Sesi">
+    </header>
+
+    <main id="mainTaskManager">
+
+        <!-- Modal para visualização da imagem -->
+        <div id="imageModal" class="modal">
+            <span class="close" id="closeModal">&times;</span>
+            <img class="modal-content" id="modalImage" alt="Imagem do chamado">
+            <div id="caption"></div>
+        </div>
+
+
+        <div id="containerAllTask">
+            <section>
+                <div id="headerAllTask">
+                    <h1>Chamados Abertos</h1>
+                    <div id="sair">
+                        <a href="./taskManager.html">
+                            <h3>Sair</h3>
+                        </a>
+                        <i class="bi bi-x-square-fill"></i>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section id="tableTasks">
+                <table id="tasks">
+                    <tr id="tableTitle">
+                        <th class="tarefas" style="width: 1%"> <i class="bi bi-camera-fill"></i> Imagem </th>
+                        <th class="tarefas" style="width: 5%;"> <i class="bi bi-clock-history"></i> Criado em </th>
+                        <th class="status" style="width: 6%;"> <i class="bi bi-door-open-fill"></i> Sala </th>
+                        <th class="descricao"> <i class="bi bi-file-earmark-text"></i> Descrição</th>
+                    </tr>
+                    <!-- <tr>
+                        <td class="tarefas">📺<a href="#"> Projetor com defeito</a></td>
+                        <td class="status"> <span class="fazer">A fazer </span></td>
+                        <td class=""><a href="#">Jorge - Ti</a></td>
+                        <td class="prazo"><span>21/03/2025</span></td>
+                        <td class="prioridade"><span class="alta">Alta</span></td>
+                        <td class="descricao">Aqui terá uma descrição da tarefa para o colaborador poder ler e resolver a tarefa</td>
+                    </tr> -->
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // function storeTaskId(id) {
+        //     console.log("Armazenando ID da tarefa: ", id); // Verifica se o ID está sendo passado corretamente
+        //     localStorage.setItem('taskId', id);
+        // }
+
+        function storageCall(id) {
+            localStorage.setItem('idCall', id);
+            window.location.href = 'http://localhost/Front/pages/infoChamado.html';
+        }
+
+        window.onload = () => {
+            fetch(`http://localhost:3000/calls`)
+                .then(response => {
+                    if (response.status === 200) {
+                        // console.log(response.json());
+                        return response.json();
+                    } else {
+                        console.log('nok');
+                    }
+                })
+                .then(calls => {
+                    if (calls.length === 0) {
+                        console.log('Não existem Chamados');
+                    } else {
+                        const callsTable = document.querySelector('#tasks');
+
+                        calls.forEach(call => {
+                            // Formatar a data
+                            const createdAt = new Date(call.created_at);
+                            const formattedDate = createdAt.toLocaleDateString('pt-BR');
+                            const formattedTime = createdAt.toLocaleTimeString('pt-BR', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: false,
+                            });
+                            const formattedDateTime = `${formattedDate}  -  ${formattedTime}`;
+
+                            // Calcular o tempo passado em horas inteiras
+                            const now = new Date();
+                            const diffInMs = now - createdAt;
+                            const diffInHours = Math.floor(diffInMs / 1000 / 60 / 60);
+
+                            let timePassed;
+                            if (diffInHours > 0) {
+                                timePassed = `${diffInHours} hora${diffInHours > 1 ? 's' : ''} atrás`;
+                            } else {
+                                timePassed = `menos de 1 hora`;
+                            }
+
+                            let htmlCall = `<tr>
+                                <td class="tarefas" style="padding-left: 5px;"><img class="callImage" width="100px" style="cursor: pointer;" src="http://localhost:3000/getImage/${call.id_image}"></td>
+                                <td class="tarefas" style="white-space: pre; padding-left: 0; text-align: center;"><a style="all: unset; cursor: pointer;" onclick="storageCall('${call.id}')">${formattedDateTime} <br> ${timePassed}</a></td>
+                                <td class="status" style="color: black; font-size: 20px;">${call.sala}</td>
+                                <td class="descricao call">${call.text}</td>
+                            </tr>`;
+
+                            callsTable.innerHTML += htmlCall;
+                        })
+                    }
+                        // Evento para abrir o modal ao clicar na imagem
+                        const modal = document.getElementById("imageModal");
+                        const modalImg = document.getElementById("modalImage");
+                        const captionText = document.getElementById("caption");
+                
+                        const images = document.querySelectorAll('.callImage');
+                        images.forEach(image => {
+                            image.addEventListener('click', function () {
+                                modal.style.display = "block";
+                                modalImg.src = this.src;
+                                captionText.innerHTML = this.alt; // Exibe o texto alternativo da imagem
+                            });
+                        });
+                
+                        // Evento para fechar o modal ao clicar no ícone de fechar
+                        const closeModal = document.getElementById("closeModal");
+                        closeModal.addEventListener('click', function () {
+                            modal.style.display = "none";
+                        });
+                
+                        // Fecha o modal ao clicar fora da imagem
+                        window.addEventListener('click', function (event) {
+                            if (event.target === modal) {
+                                modal.style.display = "none";
+                            }
+                        });
+                })
+        }
+
+    </script>
+</body>
+
+</html>

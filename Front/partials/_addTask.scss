@@ -94,7 +94,27 @@
     input {
         all: unset;
         background-color: #676767;
-        width: 50%;
+        width: 8%;
+        border-radius: 5px;
+        padding-left: 15px;
+    }
+
+    input::placeholder {
+        color: white;
+        font-family: 'Poppins';
+        font-size: 14px;
+    }
+}
+
+#addTaskSala {
+    gap: 70px;
+    width: 900px;
+    // background-color: red;
+
+    input {
+        all: unset;
+        background-color: #676767;
+        width: 8%;
         border-radius: 5px;
         padding-left: 15px;
     }

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <title>Document</title>
+</head>
+
+<body id="bodyAddTask">
+    <header>
+        <img src="https://logodownload.org/wp-content/uploads/2016/10/sesi-logo.png" alt="Logo do Sesi">
+    </header>
+
+    <section id="containerAddTask">
+        <div id="headerAllTask">
+            <h1>Abrir Chamado</h1>
+        </div>
+
+        <main id="container" class="mainAddTask">
+            <div style="position: relative; display: inline-block; width: 120px; height: 120px;">
+                <!-- Exibição da imagem -->
+                <img id="imgUpload"
+                    src="https://thumbs.dreamstime.com/b/tomada-el%C3%A9trica-quebrada-perigosa-que-cai-da-parede-fechar-284203756.jpg"
+                    alt="Foto do pedido" width="120px" height="120px">
+                <i class="bi bi-images" style="color: black; position: absolute; top: 10px; right: 10px;"></i>
+                <input id="fileInput" type="file" accept="image/*" style="display: none;">
+            </div>
+
+            <!-- <div style="position: relative; display: inline-block; width: 120px; height: 120px;">
+                <img id="imgUpload" 
+                    src="https://via.placeholder.com/120" 
+                    alt="Foto do pedido" width="120px" height="120px">
+                <i class="bi bi-images" style="color: black; position: absolute; top: 10px; right: 10px;"></i>
+                <input id="fileInput" type="file" accept="image/*" style="display: none;">
+            </div> -->
+
+            <div id="addTaskResponsavel" class="addTaskItems">
+                <h3><i class="bi bi-door-open-fill"></i> Sala</h3>
+                <input id="inputRespon" type="number" placeholder="Nº Sala">
+            </div>
+
+            <div id="addTaskDescricao">
+                <h2>Descrição</h2>
+                <textarea id="descricao" rows="14" cols="250"
+                    placeholder="Escreva aqui a descrição do problema, com o máximo de informações e detalhes possível"></textarea>
+            </div>
+
+            <a href="" id="addTaskAdicionar" style="cursor: pointer;">Adicionar</a>
+        </main>
+    </section>
+
+    <script>
+        const img = document.getElementById("imgUpload");
+        const fileInput = document.getElementById("fileInput");
+        const addTaskAdicionar = document.getElementById("addTaskAdicionar");
+        let selectedFile = null;
+        let imageId = null;
+
+        // Clique na imagem para abrir o input de arquivo
+        img.addEventListener("click", () => fileInput.click());
+
+        // Atualiza a imagem localmente
+        fileInput.addEventListener("change", (event) => {
+            selectedFile = event.target.files[0]; // Armazena o arquivo selecionado
+            if (selectedFile) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    img.src = e.target.result; // Atualiza a imagem localmente
+                };
+                reader.readAsDataURL(selectedFile);
+            }
+        });
+
+        // Clique no link "Adicionar"
+        addTaskAdicionar.addEventListener("click", async (event) => {
+            event.preventDefault(); // Impede o comportamento padrão do link
+
+            const inputSala = document.getElementById("inputRespon").value;
+            const descricao = document.getElementById("descricao").value;
+
+            console.log(inputSala + descricao);
+            
+
+            if (!selectedFile) {
+                alert("Por favor, selecione uma imagem.");
+                return;
+            }
+
+            // Cria o FormData com a imagem
+            const formData = new FormData();
+            formData.append("image", selectedFile); // Envia apenas a imagem
+
+            try {
+                const response = await fetch("http://localhost:3000/upload-image", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    imageId = result.imageId; // Armazena o ID na variável global
+                    // alert("Imagem enviada com sucesso! ID: " + imageId);
+                } else {
+                    alert("Erro ao enviar imagem.");
+                }
+            } catch (error) {
+                console.error("Erro ao conectar ao servidor:", error);
+                alert("Erro ao enviar a imagem.");
+            }
+
+            try {
+                const response = await fetch(`http://localhost:3000/createCall/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ imageId, inputSala, descricao }),
+                });
+
+                if (response.ok) {
+                    const dados = await response.json();
+                    alert('Chamado criado com sucesso');
+                    console.log('Novo chamado criado:', dados);
+                    document.getElementById("inputRespon").value = "";
+                    document.getElementById("descricao").value = "";
+                    img.src = "https://thumbs.dreamstime.com/b/tomada-el%C3%A9trica-quebrada-perigosa-que-cai-da-parede-fechar-284203756.jpg"; 
+                    selectedFile = null;
+                } else {
+                    alert('Erro ao criar o chamado');
+                }
+            } catch (error) {
+                console.error("Erro no fetch de criação do chamado:", error);
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

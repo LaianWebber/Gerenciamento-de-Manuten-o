@@ -50,7 +50,7 @@ export function getUserTask(idUser) {
                     const tasks = document.querySelector('#tasks');
                     if (tasks) {
                         let htmlTask = `<tr>
-                                        <td class="tarefas">📺<a href="../pages/infoTask.html?source=taskManager" onclick="storeTaskId(${tarefa.id})">${tarefa.task_title}</a></td>
+                                        <td class="tarefas"><a href="../pages/infoTask.html?source=taskManager" onclick="storeTaskId(${tarefa.id})">${tarefa.task_title}</a></td>
                                         <td class="status" onclick="editStatus(${tarefa.id})" > <span class="${tarefa.task_status}">${tarefa.task_status.charAt(0).toUpperCase() + tarefa.task_status.slice(1)}</span></td>
                                         <td class="responsavel"><a href="#">${tarefa.task_respon.charAt(0).toUpperCase() + tarefa.task_respon.slice(1)}</a></td>
                                         <td class="prazo"><span>${tarefa.task_prazo}</span></td>

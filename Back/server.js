@@ -117,15 +117,15 @@ app.post("/tasks/updateTask", (req, res) => {
     })
     
     res.json('ok');
-})
+});
 
 // -------------------------------------
 app.post("/user/:id/tasks/createTask", (req, res) => {
-    const { idUser, inputTitle, statusSpan, prioSpan, inputData, inputRespon, descricao } = req.body;
+    const { idUser, inputTitle, statusSpan, prioSpan, inputData, inputSala, inputRespon, descricao } = req.body;
 
     // Comando SQL para inserir uma nova linha na tabela 'tasks'
-    connection.query("INSERT INTO tasks (id_user, task_title, task_status, task_prior, task_prazo, task_respon, task_text, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())",
-        [idUser, inputTitle, statusSpan, prioSpan, inputData, inputRespon, descricao],
+    connection.query("INSERT INTO tasks (id_user, task_title, task_status, task_prior, task_prazo, task_sala, task_respon, task_text, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())",
+        [idUser, inputTitle, statusSpan, prioSpan, inputData, inputSala, inputRespon, descricao],
         (err, results) => {
             if (err) {
                 console.error('MySQL Connection error:', err);
@@ -150,6 +150,114 @@ app.delete("/user/:id/tasks/:taskId", (req, res) => {
         } else {
             res.json({ message: "Tarefa deletada com sucesso!" });
         }
+    });
+});
+
+// -------------------------------------
+const multer = require('multer');
+// const path = require('path');
+
+const storage = multer.memoryStorage(); // Usa memória em vez de salvar no disco
+const upload = multer({ storage });
+
+// Rota para upload de imagem
+app.post('/upload-image', upload.single('image'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ message: "Imagem não enviada." });
+    }
+
+    const { originalname, mimetype, buffer } = req.file;
+
+    // Salva a imagem no banco de dados
+    const query = `
+        INSERT INTO images (filename, mimetype, image_data) VALUES (?, ?, ?)`;
+
+    connection.query(query, [originalname, mimetype, buffer], (err, results) => {
+        if (err) {
+            console.error('Erro ao salvar imagem no banco:', err);
+            return res.status(500).json({ message: 'Erro ao salvar imagem.' });
+        }
+
+        res.json({
+            message: 'Imagem salva com sucesso!',
+            imageId: results.insertId, // Retorna o ID da imagem salva
+        });
+    });
+});
+
+// -------------------------------------
+app.post("/createCall", (req, res) => {
+    const { imageId, inputSala, descricao } = req.body;
+
+    connection.query("INSERT INTO chamados (id_image, sala, text, created_at) VALUES (?, ?, ?, NOW())",
+        [imageId, inputSala, descricao],
+        (err, results) => {
+            if (err) {
+                console.error('MySQL Connection error:', err);
+                res.status(500).send('MySQL Connection error');
+            } else {
+                res.json({ message: 'Chamado criado com sucesso!'});
+            }
+        }
+    );
+});
+
+// -------------------------------------
+app.get("/calls", (req, res) => {
+        connection.query("SELECT * from chamados", (err, results) => {
+            if (err) {
+                res.send('MySQL Connection error');
+            }
+            res.json(results);    
+        })
+});
+
+// -------------------------------------
+app.get("/call/:idCall", (req, res) => {
+    connection.query("SELECT * from chamados WHERE id = ?", [req.params.idCall], (err, results) => {
+        if (err) {
+           return res.send('MySQL Connection error');
+        }
+        res.json(results);
+    })
+});
+
+// -------------------------------------
+app.post("/call/updateCall", (req, res) => {
+    // console.log(req.body.idUser);
+    // console.log(req.body.idTask);
+    // console.log(req.body.inputTitle);
+    // res.send('finalizado');
+
+    connection.query("UPDATE chamados SET sala = ?, text = ? WHERE id = ?", 
+        [req.body.inputSala, req.body.descricao, req.body.idCall], (err, results) => {
+        if (err) {
+            res.send('MySQL Connection error');
+            console.log('erro');
+        }
+    })
+    
+    res.json('ok');
+});
+
+// -------------------------------------
+app.get('/getImage/:imageId', (req, res) => {
+    const { imageId } = req.params;
+
+    const query = 'SELECT mimetype, image_data FROM images WHERE id = ?';
+    connection.query(query, [imageId], (err, result) => {
+        if (err) {
+            console.error("Erro ao buscar imagem:", err);
+            return res.status(500).send("Erro no servidor");
+        }
+
+        if (result.length === 0) {
+            return res.status(404).send("Imagem não encontrada");
+        }
+
+        const { mimetype, image_data } = result[0];
+        res.setHeader('Content-Type', mimetype); // Define o tipo MIME da resposta
+        res.send(image_data); // Envia os dados da imagem como resposta
     });
 });
 
