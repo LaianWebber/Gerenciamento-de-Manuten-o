@@ -3,7 +3,6 @@ let idUser = localStorage.getItem('idUser');
 // ----------------------------
 function createTask(idUser) {
     console.log(idUser);
-    // console.log(idImage);
     
 
     let inputTitle = document.getElementById("inputNameTask").value;

@@ -10,12 +10,14 @@
 /* Container que engloba as tarefas e o conteúdo principal */
 #containerAllTask {
     width: 95%;
-    height: 90vh;
+    height: 80vh; /* Mantém a altura máxima */
+    overflow-y: auto; /* Adiciona rolagem vertical se o conteúdo ultrapassar a altura */
     margin-top: 10vh;
     border-radius: 35px;
     padding: 25px;
     background-color: white;
 }
+
 
 /* Cabeçalho que contém o título e a área de 'sair' */
 #headerAllTask {

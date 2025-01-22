@@ -285,25 +285,30 @@
                         inputSala.value = call[0].sala;
                         descricao.value = call[0].text;
 
-                        // const idImage = call[0].id_image;
+                        const idImage = call[0].id_image;
+
+                        console.log(idImage);
+                        
+                        // localStorage.setItem('idImage', idImage);
+
                         
 
-                        // fetch(`http://localhost:3000/getImage/${call[0].id_image}`)
-                        //     .then(response => {
-                        //         if (response.ok) {
-                        //             return response.blob(); // Obtém a imagem como um Blob
-                        //         } else {
-                        //             throw new Error("Erro ao buscar a imagem");
-                        //         }
-                        //     })
-                        //     .then(blob => {
-                        //         const url = URL.createObjectURL(blob); // Cria uma URL para o Blob
-                        //         const imgTag = document.querySelector("#imgUpload");
-                        //         imgTag.src = url; // Define o src da tag <img>
-                        //     })
-                        //     .catch(error => {
-                        //         console.error("Erro ao carregar a imagem:", error);
-                        //     });
+                        fetch(`http://localhost:3000/getImage/${call[0].id_image}`)
+                            .then(response => {
+                                if (response.ok) {
+                                    return response.blob(); // Obtém a imagem como um Blob
+                                } else {
+                                    throw new Error("Erro ao buscar a imagem");
+                                }
+                            })
+                            .then(blob => {
+                                const url = URL.createObjectURL(blob); // Cria uma URL para o Blob
+                                const imgTag = document.querySelector("#imgUpload");
+                                imgTag.src = url; // Define o src da tag <img>
+                            })
+                            .catch(error => {
+                                console.error("Erro ao carregar a imagem:", error);
+                            });
 
                         // Outros campos do chamado podem ser usados aqui
                         // {call[0].id_image}, {call[0].sala}, {call[0].text}, etc.

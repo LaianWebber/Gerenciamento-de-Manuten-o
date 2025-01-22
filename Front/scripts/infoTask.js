@@ -11,7 +11,7 @@ window.onload = function () {
 
 // ----------------------------
 export function getTask(idUser, idTask) {
-    fetch(`http://localhost:3000/user/${idUser}/tasks/${idTask}"`)
+    fetch(`http://localhost:3000/user/${idUser}/tasks/${idTask}`)
         .then(response => {
             if (response.status === 200) {
                 console.log('funcionou');
@@ -25,6 +25,8 @@ export function getTask(idUser, idTask) {
             if (tarefa.length === 0) {
                 console.log('Não existe');
             } else {
+                console.log(tarefa);
+                
                 const inputTitle = document.getElementById("inputNameTask");
                 inputTitle.value = tarefa.task_title;
 
@@ -52,6 +54,9 @@ export function getTask(idUser, idTask) {
 
                 const descricao = document.getElementById("descricao");
                 descricao.value = tarefa.task_text;
+
+                // console.log(tarefa.id_image);
+                
 
                 return tarefa;
             }
