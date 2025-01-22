@@ -28,7 +28,7 @@ function createTask(idUser) {
     let descricao = document.getElementById("descricao").value;
 
     // Fazer a requisição para criar uma nova tarefa
-    fetch(`http://localhost:3000/user/${idUser}/tasks/createTask/`, {
+    fetch(`http://10.116.75.68:3000/user/${idUser}/tasks/createTask/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ idUser, inputTitle, statusSpan, prioSpan, inputData, inputSala, inputRespon, descricao })
@@ -41,11 +41,11 @@ function createTask(idUser) {
 
                 // Verifica se o parâmetro 'source' tem o valor 'taskManager'
                 if (urlParams.get('source') === 'taskManager') {
-                    window.location.href = 'http://localhost:13542/Front/pages/taskManager.html';
+                    window.location.href = 'http://10.116.75.68:13542/Front/pages/taskManager.html';
                 }
 
                 if (urlParams.get('source') === 'taskColab') {
-                    window.location.href = 'http://localhost:13542/Front/pages/taskColab.html';
+                    window.location.href = 'http://10.116.75.68:13542/Front/pages/taskColab.html';
                 }
 
                 return response.json();
@@ -62,7 +62,7 @@ function createTask(idUser) {
 function deleteCall() {
     const idCall = localStorage.getItem('idCall');
 
-    fetch(`http://localhost:3000/call/deleteCall/${idCall}`, {
+    fetch(`http://10.116.75.68:3000/call/deleteCall/${idCall}`, {
         method: "DELETE",
     })
         .then((response) => {
@@ -93,7 +93,7 @@ document.getElementById('addTaskAdicionar').addEventListener('click', () => {
         createTask(idUser);
         deleteCall()
 
-        window.location.href = 'http://localhost:13542/Front/pages/openCalls.html';
+        window.location.href = 'http://10.116.75.68:13542/Front/pages/openCalls.html';
     } else {
         createTask(idUser);
     }

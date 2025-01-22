@@ -11,7 +11,7 @@ window.onload = function () {
 
 // ----------------------------
 export function getTask(idUser, idTask) {
-    fetch(`http://localhost:3000/user/${idUser}/tasks/${idTask}`)
+    fetch(`http://10.116.75.68:3000/user/${idUser}/tasks/${idTask}`)
         .then(response => {
             if (response.status === 200) {
                 console.log('funcionou');
@@ -64,7 +64,7 @@ export function getTask(idUser, idTask) {
         .then(image => {
             // console.log(image.id_image);
             
-                fetch(`http://localhost:3000/getImage/${image.id_image}`)
+                fetch(`http://10.116.75.68:3000/getImage/${image.id_image}`)
                     .then(response => {
                         if (response.ok) {
                             return response.blob(); // Obtém a imagem como um Blob
@@ -117,7 +117,7 @@ function updateTask(idUser, idTask) {
 
 
 
-    fetch(`http://localhost:3000/tasks/updateTask`, {
+    fetch(`http://10.116.75.68:3000/tasks/updateTask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ idUser, idTask, inputTitle, statusSpan, prioSpan, inputData, inputSala, inputRespon, descricao })
@@ -132,11 +132,11 @@ function updateTask(idUser, idTask) {
 
                 // Verifica se o parâmetro 'source' tem o valor 'taskManager'
                 if (urlParams.get('source') === 'taskManager') {
-                    window.location.href = 'http://localhost:13542/Front/pages/taskManager.html';
+                    window.location.href = 'http://10.116.75.68:13542/Front/pages/taskManager.html';
                 }
 
                 if (urlParams.get('source') === 'taskColab') {
-                    window.location.href = 'http://localhost:13542/Front/pages/taskColab.html';
+                    window.location.href = 'http://10.116.75.68:13542/Front/pages/taskColab.html';
                 }
 
                 // return response.json();
@@ -159,7 +159,7 @@ function updateTask(idUser, idTask) {
 
 function deleteTask(idUser, idTask) {
     if (confirm("Tem certeza de que deseja deletar esta tarefa?")) {
-        fetch(`http://localhost:3000/user/${idUser}/tasks/${idTask}`, {
+        fetch(`http://10.116.75.68:3000/user/${idUser}/tasks/${idTask}`, {
             method: "DELETE",
         })
             .then((response) => {
@@ -168,7 +168,7 @@ function deleteTask(idUser, idTask) {
                     // Aqui você pode recarregar a lista de tarefas
                     console.log(`Tarefa ${idTask} deletada!`);
 
-                    window.location.href = "http://localhost:13542/Front/pages/taskManager.html";
+                    window.location.href = "http://10.116.75.68:13542/Front/pages/taskManager.html";
                 } else if (response.status === 404) {
                     alert("Tarefa não encontrada.");
                 } else {

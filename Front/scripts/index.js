@@ -11,7 +11,7 @@ window.onload = () => {
 }
 
 export function getUserName(idUser) {
-    fetch(`http://localhost:3000/user/${idUser}`)
+    fetch(`http://10.116.75.68:3000/user/${idUser}`)
         .then(response => {
             if (response.status === 200) {
                 console.log(response.json());
@@ -25,7 +25,7 @@ export function getUserName(idUser) {
 
 // ----------------------------
 export function getUserTask(idUser) {
-    fetch(`http://localhost:3000/user/${idUser}/tasks`)
+    fetch(`http://10.116.75.68:3000/user/${idUser}/tasks`)
         .then(response => {
             if (response.status === 200) {
                 return response.json();

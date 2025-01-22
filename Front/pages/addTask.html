@@ -266,7 +266,7 @@
             const idCall = localStorage.getItem('idCall');
             console.log(idCall);
 
-            fetch(`http://localhost:3000/call/${idCall}`)
+            fetch(`http://10.116.75.68:3000/call/${idCall}`)
                 .then(response => {
                     if (response.status === 200) {
                         return response.json(); // Retorna o JSON para a próxima then
@@ -293,7 +293,7 @@
 
                         
 
-                        fetch(`http://localhost:3000/getImage/${call[0].id_image}`)
+                        fetch(`http://10.116.75.68:3000/getImage/${call[0].id_image}`)
                             .then(response => {
                                 if (response.ok) {
                                     return response.blob(); // Obtém a imagem como um Blob
