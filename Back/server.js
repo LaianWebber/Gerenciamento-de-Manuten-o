@@ -21,39 +21,38 @@ app.use(express.json());
 // Rotas
 // ---------------------------------
 app.get("/", (req, res) => {
-
     connection.query("SELECT COUNT(*) users FROM users", (err, results) => {
         if (err) {
-            res.send('MySQL Connection error');
+            return res.status(500).send('MySQL Connection error');
         }
-
         res.send('MySQL Connection OK.');
-    })
+    });
 });
+
 
 // ---------------------------------
 app.get("/tasks", (req, res) => {
     connection.query("SELECT * from tasks", (err, results) => {
         if (err) {
-            res.send('MySQL Connection error');
+            return res.status(500).send('MySQL Connection error'); // Encerra a execução aqui
         }
-        res.json(results);
-        
-    })
+        res.json(results); // Só será executado se não houver erro
+    });
 });
+
+
 
 // -------------------------------------
 
 app.get("/users/:username", (req, res) => {
     connection.query("SELECT id, passwrd, nivel FROM users WHERE username = ?", [req.params.username], (err, results) => {
         if (err) {
-            res.send('MySQL Connection error');
+            return res.status(500).send('MySQL Connection error');
         }
-
-        
         res.json(results);
     });
 });
+
 
 // -------------------------------------
 app.get("/user/:id", (req, res) => {
@@ -103,21 +102,19 @@ app.get("/user/:id/tasks/:taskId", (req, res) => {
 
 // -------------------------------------
 app.post("/tasks/updateTask", (req, res) => {
-    // console.log(req.body.idUser);
-    // console.log(req.body.idTask);
-    // console.log(req.body.inputTitle);
-    // res.send('finalizado');
-
-    connection.query("UPDATE tasks SET task_title = ?, task_status = ?, task_prior = ?, task_prazo = ?, task_respon = ?, task_text = ?, updated_at = NOW() WHERE id = ?", 
-        [req.body.inputTitle, req.body.statusSpan, req.body.prioSpan, req.body.inputData, req.body.inputRespon, req.body.descricao, req.body.idTask], (err, results) => {
-        if (err) {
-            res.send('MySQL Connection error');
-            console.log('erro');
+    connection.query(
+        "UPDATE tasks SET task_title = ?, task_status = ?, task_prior = ?, task_prazo = ?, task_sala = ?, task_respon = ?, task_text = ?, updated_at = NOW() WHERE id = ?",
+        [req.body.inputTitle, req.body.statusSpan, req.body.prioSpan, req.body.inputData, req.body.inputSala, req.body.inputRespon, req.body.descricao, req.body.idTask],
+        (err, results) => {
+            if (err) {
+                console.error('MySQL Connection error:', err);
+                return res.status(500).send('MySQL Connection error');
+            }
+            res.json('ok');
         }
-    })
-    
-    res.json('ok');
+    );
 });
+
 
 // -------------------------------------
 app.post("/user/:id/tasks/createTask", (req, res) => {
@@ -261,6 +258,21 @@ app.get('/getImage/:imageId', (req, res) => {
     });
 });
 
+// -------------------------------------
+app.delete("/call/deleteCall/:idCall", (req, res) => {
+    const { idCall } = req.params;
+
+    connection.query("DELETE FROM chamados WHERE id = ?", [idCall], (err, results) => {
+        if (err) {
+            console.error("Erro ao deletar o chamado:", err);
+            res.status(500).send("Erro ao deletar o chamado.");
+        } else if (results.affectedRows === 0) { // O affectedRows é uma propriedade do objeto results retornado pelo método query do MySQL em Node.js. Ele indica o número de linhas que foram afetadas por uma consulta SQL no banco de dados. Essa propriedade é útil para verificar o impacto de comandos como UPDATE, DELETE, ou INSERT.
+            res.status(404).send("Chamado não encontrada.");
+        } else {
+            res.json({ message: "Chamado deletada com sucesso!" });
+        }
+    });
+});
 
 
 

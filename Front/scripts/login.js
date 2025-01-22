@@ -41,9 +41,9 @@ function getUserTask(username, passwrd){
                 localStorage.setItem('idUser', id);
 
                 if (dados[0].nivel === 1) {
-                    window.location.href = 'http://localhost/Front/pages/taskManager.html';
+                    window.location.href = 'http://localhost:13542/Front/pages/taskManager.html';
                 } else if (dados[0].nivel === 2) {
-                    window.location.href = 'http://localhost/Front/pages/taskColab.html';
+                    window.location.href = 'http://localhost:13542/Front/pages/taskColab.html';
                 }
                 
                 

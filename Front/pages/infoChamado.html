@@ -109,7 +109,7 @@
                 <p id="charCount"></p>
             </div>
 
-            <a id="addTaskAdicionar" style="cursor: pointer;">Adicionar a tarefas</a>
+            <a id="addTaskAdicionar" style="cursor: pointer;">Adicionar a tarefa</a>
             <a id="addTaskDeletar" style="cursor: pointer;">Atualizar</a>
 
         </main>
@@ -214,7 +214,7 @@
                         console.log(inputSala);
                         console.log(descricao);
                         console.log(idCall);
-                        window.location.href = "http://localhost/Front/pages/openCalls.html";
+                        window.location.href = "http://localhost:13542/Front/pages/openCalls.html";
                         // return response.json();
                     } else {
                         alert('Erro ao atualizar a tarefa');
@@ -240,7 +240,8 @@
         const btnAdicionar = document.querySelector('#addTaskAdicionar');
 
         btnAdicionar.addEventListener('click', () => {
-            window.location.href = "http://localhost/Front/pages/addTask.html?source=openCalls";
+            // deleteCall()
+            window.location.href = "http://localhost:13542/Front/pages/addTask.html?source=infoChamado";
         })
     </script>
 
