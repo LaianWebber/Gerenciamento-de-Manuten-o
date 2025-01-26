@@ -16,7 +16,7 @@
     </header>
 
     <main id="mainTaskManager">
-        <div id="containerAllTask">
+        <div id="containerAllTask" class="quadroManager" style="height: auto;">
             <section>
                 <div id="headerAllTask">
                     <h1 id="title">Suas Tarefas</h1>
@@ -39,7 +39,7 @@
                 </div>
             </section>
 
-            <section id="tableTasks">
+            <section id="tableTasks" class="quadroManager">
                 <div id="container" class="fazer">
                     <div id="headerFazer">
                         <span class="fazer">A fazer </span>
@@ -172,7 +172,7 @@
         }
 
         function getUserName(idUser) {
-            fetch(`http://10.116.75.68:3000/user/${idUser}`)
+            fetch(`http://localhost:3000/user/${idUser}`)
                 .then(response => {
                     if (response.status === 200) {
                         // console.log(response.json());
@@ -193,7 +193,7 @@
 
         // ----------------------------
         function getTask(username) {
-            fetch(`http://10.116.75.68:3000/tasks`)
+            fetch(`http://localhost:3000/tasks`)
                 .then(response => {
                     if (response.status === 200) {
                         return response.json();

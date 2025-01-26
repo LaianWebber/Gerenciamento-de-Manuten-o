@@ -29,7 +29,8 @@
 
     input {
         all: unset;
-        width: 400px;
+        max-width: 400px;
+        min-width: 150px;
         font-family: 'Arimo';
         font-weight: 700;
         font-size: 30px;
@@ -195,4 +196,129 @@
 
 #addTaskAdicionar.clicked{
     color: red;
+}
+
+#selectStatus{
+    display: none;
+}
+
+#selectPrio{
+    display: none;
+}
+
+
+@media (max-width: 1024px) {
+    #addTaskResponsavel{
+        // display: none;
+        width: 100%;
+        gap: 0;
+        justify-content: space-between;
+        // padding: 0 5px;
+
+        h3{
+            font-size: 15px
+        }
+
+        input {
+            width: 50px;
+        }
+    }
+
+    #addTaskSala{
+        // display: none;
+        width: 100%;
+        // margin: 0;
+        justify-content: space-between;
+
+        input {
+            margin: 0 !important;
+            width: 65px;
+            padding: 0;
+            display: flex;
+            text-align: center;
+        }
+    }
+
+    #addTaskPrazo{
+        // display: none;
+        width: 100%;
+        gap: 0;
+        justify-content: space-between;
+
+        input {
+            font-size: 12px !important;
+            width: 110px;
+        }
+    }
+
+    #addTaskPrioridade{
+        // display: none;
+        h3 {
+            margin-right: auto;
+        }
+    }
+
+    #addTaskStatus{
+        // display: none;
+
+        h3{
+            margin-right: auto;
+        }
+    }
+
+    #addTaskAdicionar{
+        // display: none;
+        position: static;
+        text-align: center;
+    }
+
+    #containerAddTask{
+        padding: 20px 2px;
+    }
+
+    .mainAddTask{
+        padding: 10px !important;
+    }
+
+    #descricao{
+        padding: 0 0 0 2px !important;
+    }
+
+    #selectStatus{
+        background-color: #484848;
+        position: absolute;
+        display: flex;
+        width: 150px;
+        height: 160px;
+        padding: 10px;
+        border-radius: 15px;
+
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+
+        span {
+            margin: 5px 0;
+        }
+    }
+
+    #selectPrio{
+        background-color: #484848;
+        position: absolute;
+        display: flex;
+        width: 90px;
+        height: 110px;
+        padding: 10px;
+        border-radius: 15px;
+        left: 40px;
+
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        span {
+            margin: 5px;
+        }
+    }
 }

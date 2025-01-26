@@ -107,7 +107,7 @@
         }
 
         function getUserName(idUser) {
-            fetch(`http://10.116.75.68:3000/user/${idUser}`)
+            fetch(`http://localhost:3000/user/${idUser}`)
                 .then(response => {
                     if (response.status === 200) {
                         // console.log(response.json());
@@ -129,7 +129,7 @@
 
         // ----------------------------
         function getTask(username) {
-            fetch(`http://10.116.75.68:3000/tasks`)
+            fetch(`http://localhost:3000/tasks`)
                 .then(response => {
                     if (response.status === 200) {
                         return response.json();

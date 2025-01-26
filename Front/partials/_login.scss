@@ -4,7 +4,8 @@ header {
     height: 10vh;
     display: flex;
     align-items: center;
-    padding: 0 50px;
+    justify-content: center;
+    // padding: 0 50px;
     
     img{
         width: 200px;
@@ -85,4 +86,18 @@ header {
 
 #btnEntrar:hover{
     background-color: #36a523;
+}
+
+@media (max-width: 390px) {
+    #containerLogin{
+        width: 90%;
+    }
+
+    #input1, #input2, #btnEntrar {
+        width: 100%;
+    }
+
+    body{
+        height: 100vh;
+    }
 }

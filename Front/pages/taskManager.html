@@ -11,22 +11,24 @@
 </head>
 
 <body>
-    <header>
+    <header id="header">
         <img src="https://logodownload.org/wp-content/uploads/2016/10/sesi-logo.png" alt="Logo do Sesi">
+        <div id="sair">
+            <a href="../index.html">
+                <h3>Sair</h3>
+            </a>
+            <i class="bi bi-x-square-fill"></i>
+        </div>
     </header>
 
     <main id="mainTaskManager">
         <div id="containerAllTask">
-            <section>
+            <section id="sectionHeader">
                 <div id="headerAllTask">
                     <h1>Tarefas - Unidade 3º</h1>
-                    <a href="./addTask.html?source=taskManager"><i class="bi bi-clipboard2-plus-fill"></i> Adicionar tarefa</a>
-                    <a href="./openCalls.html"><i class="bi bi-card-checklist"></i> Chamados Abertos</a>
-                    <div id="sair">
-                        <a href="../index.html">
-                            <h3>Sair</h3>
-                        </a>
-                        <i class="bi bi-x-square-fill"></i>
+                    <div id="linksHeader">
+                        <a href="./addTask.html?source=taskManager"><i class="bi bi-clipboard2-plus-fill"></i> Adicionar tarefa</a>
+                        <a href="./openCalls.html"><i class="bi bi-card-checklist"></i> Chamados Abertos</a>
                     </div>
                 </div>
 
@@ -51,38 +53,6 @@
                         <th class="prioridade"> <i class="bi bi-star-fill"></i> Prioridade </th>
                         <th class="descricao"> <i class="bi bi-file-earmark-text"></i> Descrição</th>
                     </tr>
-                    <!-- <tr>
-                        <td class="tarefas">📺<a href="#"> Projetor com defeito</a></td>
-                        <td class="status"> <span class="fazer">A fazer </span></td>
-                        <td class=""><a href="#">Jorge - Ti</a></td>
-                        <td class="prazo"><span>21/03/2025</span></td>
-                        <td class="prioridade"><span class="alta">Alta</span></td>
-                        <td class="descricao">Aqui terá uma descrição da tarefa para o colaborador poder ler e resolver a tarefa</td>
-                    </tr> -->
-                    <!-- <tr>
-                        <td class="tarefas">🔌<a href="#"> Tomada não está funcionando</a></td>
-                        <td class="status"> <span class="andamento">Em andamento</span></td>
-                        <td class="responsavel"><a href="#">Jorge - Ti</a></td>
-                        <td class="prazo"><span>21/03/2025</span></td>
-                        <td class="prioridade"><span class="media">Média</span></td>
-                        <td class="descricao">Aqui terá uma descrição da tarefa para o colaborador poder ler e resolver a tarefa</td>
-                    </tr>
-                    <tr>
-                        <td class="tarefas">💧<a href="#"> Troca dos bebedouros</a></td>
-                        <td class="status"> <span class="concluida">Concluída</span></td>
-                        <td class="responsavel"><a href="#">Fulano</a></td>
-                        <td class="prazo"><span>21/03/2025</span></td>
-                        <td class="prioridade"><span class="baixa">Baixa</span></td>
-                        <td class="descricao">Aqui terá uma descrição da tarefa para o colaborador poder ler e resolver a tarefa</td>
-                    </tr>
-                    <tr>
-                        <td class="tarefas">🧯<a href="#"> Trocar extintores de incêndio</a></td>
-                        <td class="status"> <span class="arquivada">Arquivada</span></td>
-                        <td class="responsavel"><a href="#">Ciclano</a></td>
-                        <td class="prazo"><span>21/03/2025</span></td>
-                        <td class="prioridade"><span class="baixa">Baixa</span></td>
-                        <td class="descricao">Aqui terá uma descrição da tarefa para o colaborador poder ler e resolver a tarefa</td>
-                    </tr> -->
                 </table>
             </section>
         </div>

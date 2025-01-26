@@ -22,7 +22,7 @@
 
             <div id="sair">
                 <a id="linkSair" href="./taskManager.html">
-                    <h3>Sair</h3>
+                    <h3>Voltar</h3>
                 </a>
             </div>
         </div>
@@ -147,7 +147,7 @@
         iconSelect.addEventListener("click", () => {
 
             if (select.style.display === 'none') {
-                select.style.display = 'block';
+                select.style.display = 'flex';
                 rotation += 180;
                 // Aplica a rotação ao estilo do elemento
                 iconSelect.style.transform = `rotate(${rotation}deg)`;
@@ -167,7 +167,7 @@
 
 
             if (select.style.display === 'none') {
-                select.style.display = 'block';
+                select.style.display = 'flex';
                 rotation += 180;
                 // Aplica a rotação ao estilo do elemento
                 iconSelect.style.transform = `rotate(${rotation}deg)`;
@@ -219,7 +219,7 @@
 
         btnPrio.addEventListener('click', () => {
             if (selectPrio.style.display === 'none') {
-                selectPrio.style.display = 'block';
+                selectPrio.style.display = 'flex';
                 rotation2 += 180;
                 // Aplica a rotação ao estilo do elemento
                 iconSelect2.style.transform = `rotate(${rotation2}deg)`;
@@ -266,7 +266,7 @@
             const idCall = localStorage.getItem('idCall');
             console.log(idCall);
 
-            fetch(`http://10.116.75.68:3000/call/${idCall}`)
+            fetch(`http://localhost:3000/call/${idCall}`)
                 .then(response => {
                     if (response.status === 200) {
                         return response.json(); // Retorna o JSON para a próxima then
@@ -293,7 +293,7 @@
 
                         
 
-                        fetch(`http://10.116.75.68:3000/getImage/${call[0].id_image}`)
+                        fetch(`http://localhost:3000/getImage/${call[0].id_image}`)
                             .then(response => {
                                 if (response.ok) {
                                     return response.blob(); // Obtém a imagem como um Blob

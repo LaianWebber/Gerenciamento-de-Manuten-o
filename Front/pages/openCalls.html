@@ -59,6 +59,30 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        #containerAllTask{
+            min-height: 80vh;
+            height: auto;
+        }
+
+        section {
+            margin-right: 25px;
+        }
+
+        #tableTitle{
+            .tarefas{
+                min-width: 120px;
+                max-width: 125px !important;
+                width: 0%;
+                /* background-color: red; */
+            }
+
+            .status{
+                min-width: 80px;
+                width: 0%;
+            }
+        }
+
     </style>
 </head>
 
@@ -67,7 +91,7 @@
         <img src="https://logodownload.org/wp-content/uploads/2016/10/sesi-logo.png" alt="Logo do Sesi">
     </header>
 
-    <main id="mainTaskManager">
+    <main id="mainTaskManager" class="openCalls">
 
         <!-- Modal para visualização da imagem -->
         <div id="imageModal" class="modal">
@@ -83,9 +107,8 @@
                     <h1>Chamados Abertos</h1>
                     <div id="sair">
                         <a href="./taskManager.html">
-                            <h3>Sair</h3>
+                            <h3>Voltar</h3>
                         </a>
-                        <i class="bi bi-x-square-fill"></i>
                     </div>
                 </div>
             </section>
@@ -94,9 +117,9 @@
             <section id="tableTasks">
                 <table id="tasks">
                     <tr id="tableTitle">
-                        <th class="tarefas" style="width: 1%"> <i class="bi bi-camera-fill"></i> Imagem </th>
-                        <th class="tarefas" style="width: 5%;"> <i class="bi bi-clock-history"></i> Criado em </th>
-                        <th class="status" style="width: 6%;"> <i class="bi bi-door-open-fill"></i> Sala </th>
+                        <th class="tarefas"> <i class="bi bi-camera-fill"></i> Imagem </th>
+                        <th class="tarefas"> <i class="bi bi-clock-history"></i> Criado em </th>
+                        <th class="status"> <i class="bi bi-door-open-fill"></i> Sala </th>
                         <th class="descricao"> <i class="bi bi-file-earmark-text"></i> Descrição</th>
                     </tr>
                     <!-- <tr>
@@ -120,11 +143,11 @@
 
         function storageCall(id) {
             localStorage.setItem('idCall', id);
-            window.location.href = 'http://10.116.75.68:13542/Front/pages/infoChamado.html';
+            window.location.href = 'http://localhost:13542/Front/pages/infoChamado.html';
         }
 
         window.onload = () => {
-            fetch(`http://10.116.75.68:3000/calls`)
+            fetch(`http://localhost:3000/calls`)
                 .then(response => {
                     if (response.status === 200) {
                         // console.log(response.json());
@@ -163,10 +186,10 @@
                             }
 
                             let htmlCall = `<tr>
-                                <td class="tarefas" style="padding-left: 5px;"><img class="callImage" width="100px" style="cursor: pointer;" src="http://10.116.75.68:3000/getImage/${call.id_image}"></td>
-                                <td class="tarefas" style="white-space: pre; padding-left: 0; text-align: center;"><a style="all: unset; cursor: pointer;" onclick="storageCall('${call.id}')">${formattedDateTime} <br> ${timePassed}</a></td>
+                                <td class="tarefas" style="padding-left: 5px;"><img class="callImage" width="100px" style="cursor: pointer;" src="http://localhost:3000/getImage/${call.id_image}"></td>
+                                <td class="tarefas" style="white-space: pre; padding: 0 10px; text-align: center;"><a style="all: unset; cursor: pointer;" onclick="storageCall('${call.id}')">${formattedDateTime} <br> ${timePassed}</a></td>
                                 <td class="status" style="color: black; font-size: 20px;">${call.sala}</td>
-                                <td class="descricao call">${call.text}</td>
+                                <td class="descricao call" style="padding-left: 15px">${call.text}</td>
                             </tr>`;
 
                             callsTable.innerHTML += htmlCall;
