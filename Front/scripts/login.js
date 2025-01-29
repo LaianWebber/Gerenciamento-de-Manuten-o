@@ -20,7 +20,7 @@ if (btnEntrar) {
 
 function getUserTask(username, passwrd){
 
-    fetch(`http://localhost:3000/users/${username}`)
+    fetch(`http://192.168.0.11:3000/users/${username}`)
     .then(response => {
         if (response.status === 200) {
             return response.json();
@@ -41,9 +41,9 @@ function getUserTask(username, passwrd){
                 localStorage.setItem('idUser', id);
 
                 if (dados[0].nivel === 1) {
-                    window.location.href = 'http://localhost:13542/Front/pages/taskManager.html';
+                    window.location.href = 'http://192.168.0.11:13542/Front/pages/taskManager.html';
                 } else if (dados[0].nivel === 2) {
-                    window.location.href = 'http://localhost:13542/Front/pages/taskColab.html';
+                    window.location.href = 'http://192.168.0.11:13542/Front/pages/taskColab.html';
                 }
                 
                 

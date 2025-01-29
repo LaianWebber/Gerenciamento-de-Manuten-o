@@ -105,7 +105,7 @@
         });
     </script>
 
-    <script>
+    <!-- <script>
         // Seleciona a imagem e o input file
         const img = document.getElementById("imgUpload");
         const fileInput = document.getElementById("fileInput");
@@ -130,7 +130,7 @@
             }
         });
 
-    </script>
+    </script> -->
 
     <script>
         const iconSelect = document.querySelector("#toggleSelect");
@@ -259,14 +259,13 @@
             callToTask();
         }
 
-
         function callToTask() {
             console.log("Usuário veio de infoCall!");
 
             const idCall = localStorage.getItem('idCall');
             console.log(idCall);
 
-            fetch(`http://localhost:3000/call/${idCall}`)
+            fetch(`http://192.168.0.11:3000/call/${idCall}`)
                 .then(response => {
                     if (response.status === 200) {
                         return response.json(); // Retorna o JSON para a próxima then
@@ -287,13 +286,15 @@
 
                         const idImage = call[0].id_image;
 
-                        console.log(idImage);
-                        
+                        localStorage.setItem("idImage", idImage);
+
+                        console.log('IDIMG:' + idImage);
+
                         // localStorage.setItem('idImage', idImage);
 
-                        
 
-                        fetch(`http://localhost:3000/getImage/${call[0].id_image}`)
+
+                        fetch(`http://192.168.0.11:3000/getImage/${call[0].id_image}`)
                             .then(response => {
                                 if (response.ok) {
                                     return response.blob(); // Obtém a imagem como um Blob
@@ -305,6 +306,7 @@
                                 const url = URL.createObjectURL(blob); // Cria uma URL para o Blob
                                 const imgTag = document.querySelector("#imgUpload");
                                 imgTag.src = url; // Define o src da tag <img>
+                                
                             })
                             .catch(error => {
                                 console.error("Erro ao carregar a imagem:", error);
