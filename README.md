@@ -11,8 +11,9 @@ Este projeto visa fornecer uma interface intuitiva para o acompanhamento e regis
 - **HTML5**: Estruturação das páginas web.
 - **CSS3/SCSS**: Estilização e design responsivo.
 - **JavaScript**: Funcionalidades interativas no front-end.
-- **PHP**: Lógica de back-end e comunicação com o banco de dados.
+- **NodeJS**: Funcionalidades para tratamento de API's
 - **MySQL**: Banco de dados para armazenamento das informações.
+- **APACHE**: Servidor APACHE para o banco de dados;
 
 ## Funcionalidades
 
